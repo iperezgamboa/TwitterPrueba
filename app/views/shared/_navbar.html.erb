@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class=" navbar-nav">
                 <li class="menu-active">
-                    <a id="boton-home" class="nav-link" href="/">Home</a></li>
+                    <a id="boton-home" class="nav-link" href="/">HOME</a></li>
                 <% if user_signed_in? %>
                 <li class="nav-item"><%= link_to "Ver mis Asistencias", root_path,class:"nav-link"%></li>
                 <% end %>
@@ -23,7 +23,7 @@
                 <% if user_signed_in? %>
                 <li class="nav-item"><%= link_to "Salir", destroy_user_session_path, method: :delete,class:"nav-link" %></li>
                 <% else %>
-                <li class="nav-item"><%= link_to "Ingresar Usuario", new_user_session_path,class:"nav-link"  %></li>
+                <li class="nav-item"><%= link_to "INGRESAR USUARIO", new_user_session_path,class:"nav-link"  %></li>
                 <% end %>
             </ul>
         </div>

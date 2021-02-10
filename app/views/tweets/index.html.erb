@@ -1,35 +1,59 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Hola</h1>
+<div class="w3-container"> 
+    <p id="notice"><%= notice %></p>
 
-<%= link_to  "cerrar sesion", destroy_user_session_path, method: :delete %>
-<%= link_to  "Iniciar sesion", new_user_session_path %>
-<%= link_to  "Crear cuenta", new_user_registration_path %>
+    <h1>Welcome to your Account</h1>
+    <h2>Here you can show, edit and destroy your Tweet</h2>
 
-<h1>Tweets</h1>
+    <br/>
+    <button type="button" class="btn btn-warning">
+    <%= link_to  "Iniciar sesion", new_user_session_path %> 
+    </button>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @tweets.each do |tweet| %>
-      <tr>
-        <td><%= tweet.content %></td>
-        <td><%= tweet.user.email %></td>
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-   </tbody>
-</table>
+    <button type="button" class="btn btn-warning">
+    <%= link_to  "Crear cuenta", new_user_registration_path %> </button>
 
-<br>
+    <br/>
+    <br/>
 
-<%= link_to 'New Tweet', new_tweet_path %>
+    <button type="button" class="btn btn-warning ">
+    <%= link_to  "cerrar sesion", destroy_user_session_path, method: :delete %> </button>
+
+
+    </div>
+
+    <br/>
+
+    <div class="container pt-3">
+      
+
+    <h1>Tweets</h1>
+        <br/>
+        <table>
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>User</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+    </div>
+      <tbody>
+        <% @tweets.each do |tweet| %>
+          <tr>
+            <td><%= tweet.content %></td>
+            <td><%= tweet.user.email %></td>
+            <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>
+            <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>
+            <td><button type="button" class="btn btn-danger "><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %> </button> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <button type="button" class="btn btn-warning ">
+    <%= link_to 'New Tweet', new_tweet_path %> </button>
+</div>

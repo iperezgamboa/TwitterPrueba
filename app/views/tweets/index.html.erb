@@ -19,7 +19,9 @@
 
     <button type="button" class="btn btn-warning ">
     <%= link_to  "Cerrar sesion", destroy_user_session_path, method: :delete %> </button>
-
+    
+    <button type="button" class="btn btn-warning ">
+    <%= link_to 'New Tweet', new_tweet_path %> </button>
 
     </div>
 
@@ -64,5 +66,6 @@
   
   
    <%= paginate @tweets  %>
+
 
 </div>

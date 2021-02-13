@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  #this keep those who are not signed in-out of our app for the most part.
   before_action :authenticate_user!, except: [:index]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 

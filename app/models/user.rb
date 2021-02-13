@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :tweets
   has_many :likes, dependent: :destroy
+  paginates_per 50
+  
   end

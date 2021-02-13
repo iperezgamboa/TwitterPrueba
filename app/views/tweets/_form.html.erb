@@ -11,17 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
+          <div class="field">
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+            <%= form.label :tweet_id %>
+            <%= form.text_area(:content, placeholder: 'Write here tweet...', class: 'form-control mb-2') %>
+            
+          </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+          <%# <div class="field">
+            <%= form.label :user_id %>
+            <%# <%= form.text_field :user_id %>
+          <%# </div>  > %>
+
+      
+          <div class="actions">
+            <%= form.submit %>
+
+         
+
+          </div>
 <% end %>

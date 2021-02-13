@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+
+  # locale
+en:
+  views:
+    pagination:
+      next: "Show more Tweets "

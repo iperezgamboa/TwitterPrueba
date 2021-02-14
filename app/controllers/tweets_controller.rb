@@ -75,4 +75,9 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:content, :user_id)
     end
+
+    def image_url
+      profile_picture.url || default_url
+    end
+
 end

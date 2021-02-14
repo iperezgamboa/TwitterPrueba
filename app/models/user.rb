@@ -7,4 +7,11 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   paginates_per 50
   
+
+     def followers(user)
+       
+     end
+
+     def profile_picture
+     end
   end

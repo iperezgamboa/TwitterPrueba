@@ -29,7 +29,7 @@
     <br/>
 
     <div class="container pt-3">
-      
+       
      <%= paginate @tweets  %>
  
     <h1>Tweets</h1>
@@ -40,18 +40,26 @@
               <th>Content</th>
               <th>User</th>
               <th>Profile_picture</th> <br>
-              <th>Likesquantity</th>
+              <th>Likes</th>
               <th>retweets</th>
               <th colspan="3"></th>
             </tr>
+            
           </thead>
     </div>
+    
+
       <tbody>
         <% @tweets.each do |tweet| %>
           <tr>
             <td><%= tweet.content %></td>
             <td><%= tweet.user.email %></td>
+            <td><%= tweet.user.profile_picture %></td>
+            <td><%= tweet.user.like %></td>
+            <td><%= tweet.user.retweets %></td>
+
                    
+           
                                    
             <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>
             <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>

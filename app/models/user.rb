@@ -14,4 +14,11 @@ class User < ApplicationRecord
 
      def profile_picture
      end
+
+     def like
+     
+     end
+
+     def retweets
+     end 
   end

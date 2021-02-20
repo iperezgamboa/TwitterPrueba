@@ -54,7 +54,7 @@
           <tr>
             <td><%= tweet.content %></td>
             <td><%= tweet.user.email %></td>
-            <td><%= tweet.user.profile_picture %></td>
+            <td><%= image_tag tweet.user.profile_picture, width: "120rem" %></td>
             <td><%= tweet.user.like %></td>
             <td><%= tweet.user.retweets %></td> 
             

@@ -22,11 +22,3 @@ class LikesController < ApplicationController
 
 end
 
-<% pre_like = tweeet.likes.find { |like| like.user_id == current_user.id if user_signed_in? } %>
-    <% if pre_like %>
-    <%= link_to image_tag('like.png', size: "20x20"), like_path(pre_like.id), method: :delete %>
-    <% else %>
-    <%= link_to image_tag('dislike.png', size: "20x20"), likes_path(tweeet.id), method: :post %>
-    <% end %>
-    <%= tweeet.likes.count %>
-</div>

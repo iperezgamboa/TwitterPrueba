@@ -2,13 +2,14 @@ class TweetsController < ApplicationController
   #this keep those who are not signed in-out of our app for the most part.
   before_action :authenticate_user!, except: [:index]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /tweets
   # GET /tweets.json
   def index
     #@tweets = Tweet.order(params[:page]).order_by(:id)
     @tweets = Tweet.order("created_at desc").page(params[:page])
-
+    @tweeet = Tweet.new   #new
     #Book.order('published_at').page(3).per(10)
   end
 
@@ -26,6 +27,9 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
+    if @tweet.user_id != current_user.id
+      redirect_to root_path, notice: 'No tienes permiso para editar el Tweeet'
+    end
   end
 
   # POST /tweets

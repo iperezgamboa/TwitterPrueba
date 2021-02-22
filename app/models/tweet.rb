@@ -7,5 +7,15 @@ class Tweet < ApplicationRecord
   paginates_per 50
   has_many :tweets
   belongs_to :tweets, optional: true
+
+  def retweets
+    retweet_count = Tweet.group(:tweet_id).count
+    retweet_count.each do |key, value|
+        if self.id == key
+            return value
+        end
+    end
+    return 0
+end
    
 end

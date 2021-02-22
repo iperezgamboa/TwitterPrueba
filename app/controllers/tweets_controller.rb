@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   # GET /tweets/1/edit
   def edit
     if @tweet.user_id != current_user.id
-      redirect_to root_path, notice: 'No tienes permiso para editar el Tweeet'
+      redirect_to root_path, notice: 'You are not allowed to Edit a tweet that is not yours :)'
     end
   end
 
@@ -61,6 +61,17 @@ class TweetsController < ApplicationController
       end
     end
   end
+
+  #lo hice hoy 22/02
+  def retweet
+    @retweet = current_user.tweets.new(tweet_id: @tweet.id)
+    if @retweet.save
+      redirect_to root_path, notice: 'Has retuiteado exitosamente'
+    else
+      redirect_to root_path, notice: 'Ya lo has retuiteado!'
+    end
+  end
+
 
   # DELETE /tweets/1
   # DELETE /tweets/1.json

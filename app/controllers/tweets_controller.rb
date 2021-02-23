@@ -62,7 +62,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  #lo hice hoy 22/02
+  #lo hice hoy 22
   def retweet
     @retweet = current_user.tweets.new(tweet_id: @tweet.id)
     if @retweet.save
@@ -75,12 +75,20 @@ class TweetsController < ApplicationController
 
   # DELETE /tweets/1
   # DELETE /tweets/1.json
-  def destroy
-    @tweet.destroy
-    respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
-      format.json { head :no_content }
+  def destroy     
+
+    if @tweet.user_id != current_user.id
+      redirect_to root_path, notice: 'You are not allowed to DESTROY a tweet that is not yours :)' 
+    else
+      @tweet.destroy
+      respond_to do |format|
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+        format.json { head :no_content }
+    end 
+    
     end
+  
+
   end
 
   private

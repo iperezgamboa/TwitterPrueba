@@ -70,15 +70,14 @@
                
 
             
-              <td><%= tweet.user.retweets %></td>   
-              <td><%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td>   
-                                
-         
-                    
-             
-                    
-          
-            
+              <td><%= link_to image_tag('retweet.png', size: "25x15") %></td>
+
+              
+                       
+              <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id)   %></td>                
+              
+                               
+                  
                                     
               <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>
               <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>

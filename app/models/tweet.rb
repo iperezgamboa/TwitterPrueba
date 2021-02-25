@@ -8,14 +8,15 @@ class Tweet < ApplicationRecord
   has_many :tweets
   belongs_to :tweets, optional: true
 
-  def retweets
-    retweet_count = Tweet.group(:tweet_id).count
-    retweet_count.each do |key, value|
-        if self.id == key
-            return value
-        end
-    end
+  #lo hice hoy 22 tb
+    def retweets
+      retweet_count = Tweet.group(:tweet_id).count
+      retweet_count.each do |key, value|
+          if self.id == key
+              return value
+          end
+      end
     return 0
-end
+  end
    
 end

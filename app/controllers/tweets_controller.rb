@@ -9,7 +9,8 @@ class TweetsController < ApplicationController
   def index
     #@tweets = Tweet.order(params[:page]).order_by(:id)
     @tweets = Tweet.order("created_at desc").page(params[:page])
-    @tweeet = Tweet.new   #new
+    #@tweeet = Tweet.new   
+    @tweeet = Tweet.all   #new 23/03
     #Book.order('published_at').page(3).per(10)
   end
 
@@ -63,13 +64,20 @@ class TweetsController < ApplicationController
   end
 
   #lo hice hoy 22
+  
   def retweet
-    @retweet = current_user.tweets.new(tweet_id: @tweet.id)
+    @retweet = Tweet.new(
+      user_id: current_user.id,
+      content: @tweet.content,
+      tweet_id: @tweet.id
+    )
+    
     if @retweet.save
-      redirect_to root_path, notice: 'Has retuiteado exitosamente'
+      redirect_to root_path, notice: 'Has retwiteado exitosamente'
     else
-      redirect_to root_path, notice: 'Ya lo has retuiteado!'
+      redirect_to root_path, alert: 'Ya lo has retwiteado!'
     end
+
   end
 
 

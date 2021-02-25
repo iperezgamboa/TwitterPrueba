@@ -3,6 +3,9 @@ Rails.application.routes.draw do
      resources :likes 
   end
   
+  resources :retweet do
+end
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

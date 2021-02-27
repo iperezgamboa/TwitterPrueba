@@ -4,30 +4,34 @@
     <br>
 
     <h1>Welcome to your Account</h1>
-    <h2>Here you can show, edit and destroy your Tweet</h2>
+    <h2>Let's Tweet!</h2>
     
     <% if current_user %>
       <%= render 'form', tweet: @tweet %>
     <% end %>
 
     <br/>
+    
+    <% if current_user.nil? %>
       <button type="button" class="btn btn-warning">
       <%= link_to  "Iniciar sesion", new_user_session_path %> 
       </button>
+    <%end%>
 
-
+    <% if current_user.nil? %>
     <button type="button" class="btn btn-warning">
        <%= link_to  "Crear cuenta", new_user_registration_path %> </button>
+    <%end%>
 
     <br/>
     <br/>
     
     <% if current_user %>
        <button type="button" class="btn btn-warning ">
-    <%= link_to  "Cerrar sesion", destroy_user_session_path, method: :delete %> </button>
-        
-    <button type="button" class="btn btn-warning ">
-    <%= link_to 'New Tweet', new_tweet_path %> </button>
+      <%= link_to  "Cerrar sesion", destroy_user_session_path, method: :delete %> </button>
+          
+      <button type="button" class="btn btn-warning ">
+      <%= link_to 'New Tweet', new_tweet_path %> </button>
     <% end %>
 
     </div>
@@ -72,7 +76,7 @@
                   <% else %>
                     <%= link_to image_tag('dislike.png', size: "20x20"), tweet_likes_path(tweet), method: :post %>
                   <% end %>
-                  <%= tweet.likes.count %></td>                
+                  <%= tweet.likes.count %></td>        
                           
             
             

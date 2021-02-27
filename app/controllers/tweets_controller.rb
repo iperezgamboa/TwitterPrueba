@@ -11,7 +11,8 @@ class TweetsController < ApplicationController
     @tweets = Tweet.order("created_at desc").page(params[:page])
     #@tweeet = Tweet.new   
     @tweeet = Tweet.all   #new 23/03
-    #Book.order('published_at').page(3).per(10)
+    #Book.order('published_at').page(3).per(10) 
+    @tweet = Tweet.new
   end
 
   
@@ -79,7 +80,7 @@ class TweetsController < ApplicationController
     end
 
   end
-
+  
 
   # DELETE /tweets/1
   # DELETE /tweets/1.json

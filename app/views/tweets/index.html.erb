@@ -5,6 +5,10 @@
 
     <h1>Welcome to your Account</h1>
     <h2>Here you can show, edit and destroy your Tweet</h2>
+    
+    <% if current_user %>
+    <%= render 'form', tweet: @tweet %>
+    <% end %>
 
     <br/>
     <button type="button" class="btn btn-warning">

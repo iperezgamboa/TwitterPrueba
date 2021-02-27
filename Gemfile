@@ -78,3 +78,11 @@ gem 'devise'
 #Bootsrap
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'devise'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'

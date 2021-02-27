@@ -8,6 +8,12 @@ class Tweet < ApplicationRecord
   has_many :tweets
   belongs_to :tweets, optional: true
 
+  scope :tweets_for_me, ->(users_list) { where(
+        user_id: users_list.map do |friend|
+            friend.friend_id
+        end
+    ) } 
+
   #lo hice hoy 22 tb
     def retweets
       retweet_count = Tweet.group(:tweet_id).count

@@ -67,18 +67,12 @@ class TweetsController < ApplicationController
   #lo hice hoy 22
   
   def retweet
-    @retweet = Tweet.new(
-      user_id: current_user.id,
-      content: @tweet.content,
-      tweet_id: @tweet.id
-    )
-    
+    @retweet = current_user.tweets.new(tweet_id: @tweet.id)
     if @retweet.save
-      redirect_to root_path, notice: 'Has retwiteado exitosamente'
+      redirect_to root_path, notice: 'Has retuiteado exitosamente'
     else
-      redirect_to root_path, alert: 'Ya lo has retwiteado!'
+      redirect_to root_path, notice: 'Ya lo has retuiteado!'
     end
-
   end
   
 

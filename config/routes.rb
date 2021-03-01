@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :tweets do
      resources :likes 
+     post :retweet
   end
   
-  resources :retweet do
-end
+  
+  
+
+  
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

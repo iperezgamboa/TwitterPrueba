@@ -15,6 +15,7 @@ class User < ApplicationRecord
     
      def like
      
+      
      end
 
      def retweets

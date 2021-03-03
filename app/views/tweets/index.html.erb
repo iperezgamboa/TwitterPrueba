@@ -88,9 +88,10 @@
               <div> 
               
               
-                <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id), method: :post if user_signed_in? && tweet.user_id  %></td>
+                <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id)  %></td>
 
                 <%= tweet.count_retweet if user_signed_in? && tweet.user_id != current_user.id %>
+                
               </div>
 
               <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id)   %></td>                
@@ -107,9 +108,7 @@
         </tbody>
       </table>
 
-  
-
-    <br>
+     <br>
 
     <button type="button" class="btn btn-warning ">
     <%= link_to 'New Tweet', new_tweet_path %> </button>

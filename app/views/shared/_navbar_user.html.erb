@@ -7,24 +7,35 @@
 
         <div class="collapse navbar-collapse align-items-baseline" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mr-5">
-                <li class="nav-item mr-3">
+                <li class="nav-item mr-12">
                     <a id="boton-home" class="nav-link" href="/">HOME</a></li>
-                <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to "Ver mis Asistencias", root_path,class:"nav-link"%></li>
-                <% end %>
+            <ul class="nav navbar-nav navbar-right">
+                    <% if user_signed_in? %>
+                      <li class="nav-item"><%= link_to "Log out", destroy_user_session_path, method: :delete,class:"nav-link" %></li>
+                    <% else %>
+                      <li class="nav-item"><%= link_to "INGRESAR USUARIO", new_user_session_path,class:"nav-link"  %></li>
+                    <% end %>
+            </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <ul class="">
                     </ul>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to "Salir", destroy_user_session_path, method: :delete,class:"nav-link" %></li>
-                <% else %>
-                <li class="nav-item"><%= link_to "INGRESAR USUARIO", new_user_session_path,class:"nav-link"  %></li>
-                <% end %>
-            </ul>
+           
+        
+        <%= form_tag(root_path, method: 'get', class: 'd-flex nav-search-placeholder') do %>
+                <%= text_field_tag :q, nil, placeholder: 'Search Tweets...', class:'mr-3 nav-search', id:'search' %>
+                <%= submit_tag 'Search', class: 'submit-btn-search' %>
+            <% end %>
+
+
         </div>
+        
+         
+
+
     </nav>
     <!--/.nav-collapse -->
+
+ 

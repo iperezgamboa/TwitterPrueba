@@ -24,6 +24,7 @@ ActiveAdmin.register User do
 			user.likes.count
 		end
   
+    #this must be changed for friends.count
 		column 'Tweets quantity' do |user|
 			user.tweets.count
 		end
@@ -39,6 +40,14 @@ ActiveAdmin.register User do
 			end
 			arr.delete(nil)
 			arr.length
+		end
+
+    column 'Profile_picture Link' do |user|
+		
+			user.profile_picture do |tweet|
+				
+			end
+		
 		end
 
 

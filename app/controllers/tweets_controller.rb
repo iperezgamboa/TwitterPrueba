@@ -10,9 +10,16 @@ class TweetsController < ApplicationController
     #@tweets = Tweet.order(params[:page]).order_by(:id)
     @tweets = Tweet.order("created_at desc").page(params[:page])
     #@tweeet = Tweet.new   
-    @tweeet = Tweet.all   #new 23/03
+    @tweet = Tweet.all   #new 23/03
     #Book.order('published_at').page(3).per(10) 
     @tweet = Tweet.new
+    if params[:q]
+      @tweets = Tweet.where("content LIKE ?", "%#{params[:q]}%").order(created_at: :desc).page(params[:page])
+      elsif current_user.nil?
+        @tweets = Tweet.order(created_at: :desc).page(params[:page])
+      else
+      @tweets = Tweet.tweets_for_me(Tweet.where("user_id = ?", current_user.id)).order(created_at: :desc).page(params[:page])
+    end
   end
 
   

@@ -74,11 +74,9 @@ class TweetsController < ApplicationController
   #lo hice hoy 22
   
   def retweet
-    origin =  Tweet.find(params[:id])
+    origin =  Tweet.find(params[:tweet_id].to_i)
    
- 
-
-    @retweet = current_user.tweets.new(tweet_id: @tweet.id) 
+      @retweet = current_user.tweets.new(tweet_id: origin.id) 
    
     if @retweet.save
       redirect_to root_path, notice: 'Has retuiteado exitosamente'

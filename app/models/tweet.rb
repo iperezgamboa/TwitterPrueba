@@ -9,10 +9,10 @@ class Tweet < ApplicationRecord
   belongs_to :tweets, optional: true
 
 
-  #FALTA REALIZAR BIEN, PROBLEMA CON EL METODO friend  
+    
   scope :tweets_for_me, ->(users_list) { where(
         user_id: users_list.map do |friend|
-            friend.user  #friend.id
+            friend.id 
         end
     ) } 
 

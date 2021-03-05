@@ -21,7 +21,7 @@ ActiveAdmin.register User do
 		column 'Username', :username
 
 		column 'Number of users followed' do |user|
-			user.likes.count
+			user.friends.count
 		end
   
     #this must be changed for friends.count
@@ -41,7 +41,7 @@ ActiveAdmin.register User do
 			arr.delete(nil)
 			arr.length
 		end
-
+			
     column 'Profile_picture Link' do |user|
 		
 			user.profile_picture do |tweet|

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
      resources :likes 
      post :retweet
   end
-  
+
+  post 'user/:user_id', to: 'friends#create', as: 'friend_create'
+  delete 'user/:user_id', to: 'friends#destroy', as: 'friend_destroy'
   
   
 

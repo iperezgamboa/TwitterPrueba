@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
       elsif current_user.nil?
         @tweets = Tweet.order(created_at: :desc).page(params[:page])
       else
-      @tweets = Tweet.tweets_for_me(Tweet.where("user_id = ?", current_user.id)).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.tweets_for_me(current_user.friends).order(created_at: :desc).page(params[:page])
     end
   end
 

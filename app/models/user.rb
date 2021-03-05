@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :tweets, dependent: :destroy #Los tweets se eliminan si la cuenta es eliminada
   has_many :likes, dependent: :destroy #Los likes se eliminan si la cuenta es eliminada
+  has_many :friends, dependent: :destroy
   paginates_per 50
  
 

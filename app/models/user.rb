@@ -9,16 +9,12 @@ class User < ApplicationRecord
   paginates_per 50
  
 
-     def followers(user)
-       
+     def followers(user)       
      end
-
     
-     def like
-     
-      
+     def like          
      end
 
      def retweets
      end 
-  end
+end

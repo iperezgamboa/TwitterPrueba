@@ -1,7 +1,5 @@
 <br>
 <br>
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-shadow" id="navbar">
     <div class="container">
         <a class="navbar-brand" href="/"><%=image_tag('logo-twitter.png', size: "50x40")%></a>
@@ -10,12 +8,19 @@
         </button>
         <div class="collapse navbar-collapse align-items-baseline" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mr-5">
-                <li class="nav-item mr-3">
-                    <%= link_to 'Crear Cuenta', new_user_registration_path, class: 'nav_guest_text' %>
+                <li class="nav-item mr-3">                     
+                     <% if current_user.nil? %>
+                       <button type="button" class="btn btn-warning">
+                       <%= link_to  "Crear cuenta", new_user_registration_path %> </button>
+                    <%end%>
                 </li>
                 <li class="nav-item">
-                    <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'nav_guest_text' %>
-                </li>
+                     <% if current_user.nil? %>
+                        <button type="button" class="btn btn-warning">
+                        <%= link_to  "Iniciar sesion", new_user_session_path %> 
+                        </button>
+                     <%end%>                   
+                </li>                 
             </ul>
             <%= form_tag(root_path, method: 'get', class: 'd-flex nav-search-placeholder') do %>
                 <%= text_field_tag :q, nil, placeholder: 'Buscar tweets...', class:'mr-3 nav-search', id: 'search' %>
@@ -24,3 +29,4 @@
         </div>
     </div>
 </nav>
+

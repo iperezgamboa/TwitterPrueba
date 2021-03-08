@@ -2,9 +2,16 @@
 <div class="w3-container"> 
     <br>
     <br>
-
-    <h1>Welcome to your Account</h1>
-    <h2>Let's Tweet!</h2>
+    
+    <h1>Welcome to Tweeter Clone </h1>
+    
+    <% if current_user.nil? %>
+    <h4>To tweet, you need to create an account first or sign in into your account</h4>  
+    <% end %>
+    <% if current_user %>
+    <h4>You are logged in, now you can tweet ;)</h4>  
+    <% end %>
+        
     
     <% if current_user %>
       <%= render 'form', tweet: @tweet %>
@@ -12,59 +19,49 @@
 
     <br/>
     
-    <% if current_user.nil? %>
-      <button type="button" class="btn btn-warning">
-      <%= link_to  "Iniciar sesion", new_user_session_path %> 
-      </button>
-    <%end%>
+    <%# if current_user.nil? %>
+     <%#  <button type="button" class="btn btn-warning">
+      <%# link_to  "Iniciar sesion", new_user_session_path %> 
+    <%#   </button>
+    <%#end%>
 
-    <% if current_user.nil? %>
-    <button type="button" class="btn btn-warning">
-       <%= link_to  "Crear cuenta", new_user_registration_path %> </button>
-    <%end%>
+    <%# if current_user.nil? %>
+     <%#  <button type="button" class="btn btn-warning">
+      <%#= link_to  "Crear cuenta", new_user_registration_path %>
+      <%#  </button>
+    <%#end%>
 
     <br/>
     <br/>
     
-    <% if current_user %>
-       <button type="button" class="btn btn-warning ">
-      <%= link_to  "Cerrar sesion", destroy_user_session_path, method: :delete %> </button>
-    
-          
+    <% if current_user %>               
       <button type="button" class="btn btn-warning ">
       <%= link_to 'New Tweet', new_tweet_path %> </button>
     <% end %>
 
-    </div>
-
-    <br/>
-
-    <div class="container pt-3">
+</div>
+    <br/>  
        
-     <%= paginate @tweets  %>
+      <%= paginate @tweets  %>
  
-    <h1>Tweets</h1>
-        <br/>
-        <div class="table-responsive">
-            <table class="table">
-
-              <thead>
-                <tr>
-                  <th>Profile_picture</th> <br>
-                  <th>Content</th>
-                  <th> User</th>
-                  <th>Likes</th>
-                  <th>retweets</th>
-                  <th>created date</th>
-                  <th>Friends</th>
-
-                  <th colspan="3"></th>
-                </tr>
-                
-              </thead>
-     </div> 
- 
+    <h1>Tweets</h1>         
        
+       <table class="table">
+
+        <thead>
+          <tr>
+            <th>Profile_picture</th> <br>
+            <th>Content</th>
+            <th> User</th>
+            <th>Likes</th>
+            <th>retweets</th>
+            <th>created date</th>
+            <th>Friends</th>
+
+            <th colspan="3"></th>
+          </tr>                
+        </thead>
+              
         <tbody>
         
           <% @tweets.each do |tweet| %>
@@ -79,37 +76,31 @@
                     <%= word %>
                   <% end %>
                 <% end %> 
-              </td>    
+            </td>    
               
-              <td>Posted by <%= tweet.user.email %></td> 
-              <td><% pre_like = tweet.likes.find { |like| like.user_id == current_user.id if user_signed_in? } %>
+            <td>Posted by <%= tweet.user.email %></td> 
+            <td><% pre_like = tweet.likes.find { |like| like.user_id == current_user.id if user_signed_in? } %>
                   <% if pre_like %>
                     <%= link_to image_tag('like.png', size: "20x20"), tweet_like_path(tweet, pre_like), method: :delete %>
                   <% else %>
                     <%= link_to image_tag('dislike.png', size: "20x20"), tweet_likes_path(tweet), method: :post %>
                   <% end %>
-                  <%= tweet.likes.count %></td>        
+                <%= tweet.likes.count %></td>        
                
-               <% if tweet.tweet_id.present? %>
-                  <p> Tweet de <%= tweet.origin.user.username %> </p>
-               <% end %>
-
-              
-
+                <% if tweet.tweet_id.present? %>
+                   <p> Tweet de <%= tweet.origin.user.username %> </p>
+                <% end %>           
               
               <div>
-               <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id),{method: :post} %></td>                    
+                   <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id),{method: :post} %></td>                    
                    <%= tweet.count_retweet if user_signed_in? && tweet.user_id != current_user.id %>
               </div>
 
-              <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td>                                              
-                                                
-              <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td> 
-              
-              <td><button type="button" class="btn btn-light "><%= link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></button> </td> 
-         
-              <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>
-              <td><button type="button" class="btn btn-danger "><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %> </button> </td>
+                  <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td>                                                                                        
+                  <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>
+                  <td><button type="button" class="btn btn-light "><%= link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></button> </td> 
+                  <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>
+                  <td><button type="button" class="btn btn-danger "><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %> </button> </td>
             </tr>
           <% end %>
         </tbody>
@@ -117,14 +108,12 @@
     
      <br>
 
-    <button type="button" class="btn btn-warning ">
-    <%= link_to 'New Tweet', new_tweet_path %> </button>
+      <button type="button" class="btn btn-warning ">
+      <%= link_to 'New Tweet', new_tweet_path %> </button>
 
      <br/>  
      <br/>  
-  
-  
-   <%= paginate @tweets  %>
-
+    
+   <%= paginate @tweets  %> 
 
 </div>

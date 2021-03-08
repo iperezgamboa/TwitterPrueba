@@ -1,8 +1,7 @@
 class TweetsController < ApplicationController
   #this keep those who are not signed in-out of our app for the most part.
   before_action :authenticate_user!, except: [:index]
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy]  
 
   # GET /tweets
   # GET /tweets.json
@@ -20,9 +19,7 @@ class TweetsController < ApplicationController
       else
       @tweets = Tweet.tweets_for_me(current_user.friends).order(created_at: :desc).page(params[:page])
     end
-  end
-
-  
+  end  
 
   # GET /tweets/1
   # GET /tweets/1.json
@@ -71,8 +68,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  #lo hice hoy 22
-  
   def retweet
     origin =  Tweet.find(params[:tweet_id].to_i)
    
@@ -83,25 +78,20 @@ class TweetsController < ApplicationController
     else
       redirect_to root_path, notice: 'Ya lo has retuiteado!'
     end
-  end
-  
+  end  
 
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy     
-
     if @tweet.user_id != current_user.id
-      redirect_to root_path, notice: 'You are not allowed to DESTROY a tweet that is not yours :)' 
-    else
-      @tweet.destroy
-      respond_to do |format|
-        format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
-        format.json { head :no_content }
-    end 
-    
-    end
-  
-
+        redirect_to root_path, notice: 'You are not allowed to DESTROY a tweet that is not yours :)' 
+        else
+        @tweet.destroy
+        respond_to do |format|
+          format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+          format.json { head :no_content }
+        end     
+    end  
   end
 
   private
@@ -118,5 +108,4 @@ class TweetsController < ApplicationController
     def image_url
       profile_picture.url || default_url
     end
-
 end

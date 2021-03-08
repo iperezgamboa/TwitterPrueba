@@ -14,11 +14,9 @@
 <p>
   <strong>Photo user who liked:</strong>
   <% @tweet.likes.each do |like| %>
-    <%= image_tag like.user.profile_picture %>
+  <%= image_tag like.user.profile_picture %>
   <% end %>
 </p>
-
-
 
 <div class="text-center mt-3 mb-5">
 

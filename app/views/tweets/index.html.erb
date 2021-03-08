@@ -53,10 +53,10 @@
           <tr>
             <th>Profile_picture</th> <br>
             <th>Content</th>
-            <th> User</th>
+            <th>User</th>
             <th>Likes</th>
-            <th>retweets</th>
-            <th>created date</th>
+            <th>Retweets</th>
+            <th>Created date</th>
             <th>Friends</th>
 
             <th colspan="3"></th>
@@ -97,8 +97,8 @@
               </div>
 
                   <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td> 
-                  <td> <% if current_user = user_signed_in? %> 
-                       <% link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></td>             
+                  <td> <% if current_user = user_signed_in?  %> 
+                       <button><%= link_to 'Delete Friend', friend_destroy_path(tweet.user.id), method: :delete %></button></td>             
                        <% else %>
                         <button><%= link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></button> </td>             
                        <% end %>                                   

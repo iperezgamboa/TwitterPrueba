@@ -21,6 +21,20 @@ class TweetsController < ApplicationController
     end
   end  
 
+  def news
+    tweets = Tweet.last(50)
+    pretty_tweets = helpers.transform_to_hash(tweets)
+    render json: pretty_tweets
+  end
+
+  def date
+    date_1 = params[:fecha1].to_date
+    date_2 = params[:fecha2].to_date.end_of_day
+    date_tweets = Tweet.created_between(date_1, date_2)
+    pretty_tweets = helpers.transform_to_hash_with_date(date_tweets)
+    render json: pretty_tweets
+  end
+
   # GET /tweets/1
   # GET /tweets/1.json
   def show
@@ -54,6 +68,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  def create_api_tweet
+    @tweet = Tweet.new(
+      content: params[:content],
+      user_id: current_user.id
+    )
+  end 
+    
+
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
@@ -74,9 +96,9 @@ class TweetsController < ApplicationController
       @retweet = current_user.tweets.new(tweet_id: origin.id) 
    
     if @retweet.save
-      redirect_to root_path, notice: 'Has retuiteado exitosamente'
+      redirect_to root_path, notice: 'You have retweeted succesfully'
     else
-      redirect_to root_path, notice: 'Ya lo has retuiteado!'
+      redirect_to root_path, notice: 'You have already retweet this tweet'
     end
   end  
 

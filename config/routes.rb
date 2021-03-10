@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post 'user/:user_id', to: 'friends#create', as: 'friend_create'
   delete 'user/:user_id', to: 'friends#destroy', as: 'friend_destroy'
   
+  get 'api/news', to: 'tweets#news'
+  get 'api/:fecha1/:fecha2', to: 'tweets#date'
+  post 'api/tweets/:content', to: 'tweets#create_api_tweet'
   
 
   

@@ -48,7 +48,7 @@
                 <%= tweet.likes.count %></td>        
                
                       <% if tweet.tweet_id.present? %>
-                        <p> Tweet de <%= tweet.origin.user.username %> </p>
+                        <p> Tweet de <%= tweet.user.username %> </p>
                       <% end %>         
               <div>
                    <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id),{method: :post} %></td>                    

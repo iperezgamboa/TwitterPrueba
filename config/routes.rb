@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'api/news', to: 'tweets#news'
   get 'api/:fecha1/:fecha2', to: 'tweets#date'
-  post 'api/tweets/:content', to: 'tweets#create_api_tweet'
+  post 'api/tweets', to: 'tweets#create_api_tweet'
   
   
   

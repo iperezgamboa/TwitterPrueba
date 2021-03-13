@@ -1,7 +1,9 @@
 class TweetsController < ApplicationController
   #this keep those who are not signed in-out of our app for the most part.
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :create_api_tweet]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]  
+  skip_before_action :verify_authenticity_token, only:[:create_api_tweet]
+ 
 
   # GET /tweets
   # GET /tweets.json
@@ -68,13 +70,26 @@ class TweetsController < ApplicationController
       end
     end
   end
-
+  
   def create_api_tweet
     @tweet = Tweet.new(
       content: params[:content],
       user_id: current_user.id
     )
-  end 
+    
+    respond_to do |format|
+      if @tweet.save
+        format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
+        format.json { render json: @tweet, status: :created, location: @tweet }
+      else
+        format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
+    
+  end
+end 
+
     
 
   # PATCH/PUT /tweets/1
@@ -131,4 +146,4 @@ class TweetsController < ApplicationController
     def image_url
       profile_picture.url || default_url
     end
-end
+

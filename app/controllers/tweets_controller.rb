@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   #this keep those who are not signed in-out of our app for the most part.
   before_action :authenticate_user!, except: [:index, :news, :date]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]  
-  skip_before_action :verify_authenticity_token, only:[:create_api_tweet]
+  before_action :verify_authenticity_token, only:[:create_api_tweet]
   
   #http_basic_authenticate_with name: "desafio", password: "12345", except: :index
   #before_action :authenticate_user!, except: [:index :create_api_tweet]
@@ -74,23 +74,26 @@ class TweetsController < ApplicationController
     end
   end
 
-  def create_api_tweet
-    @tweet = Tweet.new(
-      content: params[:content],
-      user_id: current_user.id
-    )
+def create_api_tweet
+  #@user = User.find_by(email: 'i.perezgamboa@twittertest')
+  @tweet = Tweet.new(
+    content: params[:content],
+    user_id: current_user.id
+  )
     
-    respond_to do |format|
-      if @tweet.save
-        format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
-        format.json { render json: @tweet, status: :created, location: @tweet }
-      else
-        format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
-      end
+  respond_to do |format|
+    if @tweet.save
+      format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
+      format.json { render json: @tweet, status: :created, location: @tweet }
+    else
+      format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
+      format.json { render json: @tweet.errors, status: :unprocessable_entity }
     end
   end
-  
+end
+
+
+
 
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json

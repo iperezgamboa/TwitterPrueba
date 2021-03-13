@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'api/create_api_tweet'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :tweets do
@@ -12,10 +13,9 @@ Rails.application.routes.draw do
 
   get 'api/news', to: 'tweets#news'
   get 'api/:fecha1/:fecha2', to: 'tweets#date'
-  post 'api/tweets', to: 'tweets#create_api_tweet'
+  post 'api/tweets', to: 'api#create_api_tweet'
   
-  
-  
+   
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

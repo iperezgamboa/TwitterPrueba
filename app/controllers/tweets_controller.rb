@@ -66,7 +66,7 @@ class TweetsController < ApplicationController
         format.html { redirect_to root_path, notice: 'Tweet was successfully created.' }
         format.json { render :show, status: :created, location: @tweet }
       else
-        format.html { redirect_to root_path, notice: ' Remember to write something in your tweet' }
+        format.html { redirect_to root_path, alert: ' Your tweet could not be created. Remember to write something in your tweet' }
         
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
@@ -120,7 +120,7 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1.json
   def destroy     
     if @tweet.user_id != current_user.id
-        redirect_to root_path, notice: 'You are not allowed to DESTROY a tweet that is not yours :)' 
+        redirect_to root_path, alert: 'You are not allowed to DESTROY a tweet that is not yours :)' 
         else
         @tweet.destroy
         respond_to do |format|

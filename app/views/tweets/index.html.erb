@@ -10,23 +10,26 @@
          <figure>
           <%= image_tag('portada.png', size: "1000x600", class: 'registration_img') %>   
        </figure>
-    <% end %>
-    
+    <% end %>    
     
     <% if current_user %>
-        <h4>You are logged in, now you can tweet.</h4>
+       <h4>You are logged in, now you can tweet.</h4>
        <h4> To search a tweet and retweets that contains an specific content, write it down in the nav above and click in the "search botton". Example: write "dona" </h4>
        
        <%= render 'form', tweet: @tweet %>
 
-       <%= render 'tweets/table' %>          
-                                    
+       <%= render 'tweets/table' %>                          
      
     <% end %> 
               
     <br/>
-    
-    <%# if current_user.nil? %>
+    <br/>
+    <br/>
+
+</div>
+
+
+ <%# if current_user.nil? %>
      <%#  <button type="button" class="btn btn-warning">
       <%# link_to  "Iniciar sesion", new_user_session_path %> 
     <%#   </button>
@@ -37,8 +40,3 @@
       <%#= link_to  "Crear cuenta", new_user_registration_path %>
       <%#  </button>
     <%#end%>
-
-    <br/>
-    <br/>
-
-</div>

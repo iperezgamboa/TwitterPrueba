@@ -14,7 +14,6 @@ class Tweet < ApplicationRecord
         end
     ) } 
 
-
   scope :created_between, ->(start_date, end_date) {where(
       "(created_at) >= ? AND (created_at) <= ?", start_date, end_date
   ) }
@@ -30,12 +29,11 @@ class Tweet < ApplicationRecord
     end
     
     def origin
-      @origin = Tweet.find(self.tweet_id)
-      "other person"
+        @origin = Tweet.find(self.tweet_id)
+        "other person"
     end  
 
     def count_retweet
-      Tweet.where(tweet_id: self.id).count
+        Tweet.where(tweet_id: self.id).count
     end
 end 
-

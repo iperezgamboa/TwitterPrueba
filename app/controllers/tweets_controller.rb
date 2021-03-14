@@ -73,21 +73,21 @@ class TweetsController < ApplicationController
     end
   end
 
-    def create_api_tweet
-        @tweet = Tweet.new(
-        content: params[:content],
-        user_id: current_user.id
-    )
+  def create_api_tweet
+      @tweet = Tweet.new(
+      content: params[:content],
+      user_id: current_user.id
+  )
     
   respond_to do |format|
-    if @tweet.save
-        format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
-        format.json { render json: @tweet, status: :created, location: @tweet }
-    else
-        format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      if @tweet.save
+          format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
+          format.json { render json: @tweet, status: :created, location: @tweet }
+      else
+          format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
+          format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
     end
-  end
   end 
 
   # PATCH/PUT /tweets/1
@@ -132,16 +132,16 @@ class TweetsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_tweet
-      @tweet = Tweet.find(params[:id])
-    end
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def tweet_params
-      params.require(:tweet).permit(:content, :user_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def tweet_params
+    params.require(:tweet).permit(:content, :user_id)
+  end
 
-    def image_url
-      profile_picture.url || default_url
-    end
+  def image_url
+    profile_picture.url || default_url
+  end
 end

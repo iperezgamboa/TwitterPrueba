@@ -1,9 +1,8 @@
-
 <div>
-    <br/>  
-       
+    <br/>       
+
       <%= paginate @tweets  %>
- 
+
     <h1>Tweets</h1>         
        
        <table class="table">
@@ -24,8 +23,7 @@
               
         <tbody>
                 
-          <% @tweets.each do |tweet| %>
-        
+          <% @tweets.each do |tweet| %>       
          
             <tr>
               <td><%= image_tag tweet.user.profile_picture, width: "64x64rem" %></td>
@@ -50,35 +48,27 @@
                   <%= link_to image_tag('dislike.png', size: "20x20"), tweet_likes_path(tweet), method: :post %>
                 <% end %>
 
-                  <%= tweet.likes.count %>
-              </td>        
-              
-                          
-             
-                <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id),{method: :post} %> 
+                <%= tweet.likes.count %>
+              </td>         
+                           
+              <td><%= link_to image_tag('retweet.png', size: "25x20"), tweet_retweet_path(tweet.id),{method: :post} %> 
                 <%= tweet.count_retweet %>
-                </td>                    
+              </td>                    
                                  
 
-                  <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td> 
-                  <td> <% if user_signed_in? && current_user.id != tweet.user.id %>
-                  <% pre_follow = current_user.friends.find { |friend| friend.friend_id == tweet.user.id } %>
-                    <% if pre_follow %>
-                      <button><%= link_to 'Delete Friend', friend_destroy_path(tweet.user.id), method: :delete %></button>
-                    <% else %>
-                      <button><%= link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></button> 
-                    <% end %> 
+              <td><i class="far fa-clock mr-1"></i> <%= link_to time_ago_in_words(tweet.created_at), tweet_path(tweet.id) %></td> 
+              <td><% if user_signed_in? && current_user.id != tweet.user.id %>
+                    <% pre_follow = current_user.friends.find { |friend| friend.friend_id == tweet.user.id } %>
+                      <% if pre_follow %>
+                        <button><%= link_to 'Delete Friend', friend_destroy_path(tweet.user.id), method: :delete %></button>
+                      <% else %>
+                        <button><%= link_to 'Add Friend', friend_create_path(tweet.user.id), method: :post %></button> 
+                      <% end %> 
                   <% end %> 
-                  </td>  
-                                
-                      
-
-                  
-                  <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>
-
-                 
-                  <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>
-                  <td><button type="button" class="btn btn-danger "><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %> </button> </td>
+              </td>                                        
+                <td><button type="button" class="btn btn-light "><%= link_to 'Show', tweet %></button> </td>                 
+                <td><button type="button" class="btn btn-light "><%= link_to 'Edit', edit_tweet_path(tweet) %></button> </td>
+                <td><button type="button" class="btn btn-danger "><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %> </button> </td>
             </tr>
           <% end %>
         </tbody>

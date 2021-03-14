@@ -6,8 +6,7 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy #Los tweets se eliminan si la cuenta es eliminada
   has_many :likes, dependent: :destroy #Los likes se eliminan si la cuenta es eliminada
   has_many :friends, dependent: :destroy #Los friends se eliminan si la cuenta es eliminada
-  paginates_per 50
- 
+  paginates_per 50 
 
      def followers(user)       
      end

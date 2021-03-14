@@ -1,57 +1,55 @@
-
 <br>
 
-
- <div class="container my-5">
-    <div class="row">
-      <div class="col-6">
-       <figure>
-          <%= image_tag('portada.png', size: "600x670", class: 'registration_img') %>   
-       </figure>
-   </div>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-6">
+      <figure>
+        <%= image_tag('portada.png', size: "600x670", class: 'registration_img') %>   
+      </figure>
+  </div>
 
 <div class="col-6">
   <div class="card d-flex justify-content-center p-5 font-weight-bold">
 
-    <h2>Sign up</h2>
+  <h2>Sign up</h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "users/shared/error_messages", resource: resource %> 
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %> 
 
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
-      </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+  </div>
 
-      <div class="field">
-        <%= f.label :username %><br />
-        <%= f.text_field :username, class: "form-control", autocomplete: "username" %>
-      </div>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, class: "form-control", autocomplete: "username" %>
+  </div>
 
-      <div class="field">
-        <%= f.label :profile_picture %><br />
-        <%= f.text_field :profile_picture, class: "form-control", autocomplete: "profile_picture", placeholder: "Insert an URL of your profile picture", autofocus: true, autocomplete: "profile_picture" %>
-      </div>
+  <div class="field">
+    <%= f.label :profile_picture %><br />
+    <%= f.text_field :profile_picture, class: "form-control", autocomplete: "profile_picture", placeholder: "Insert an URL of your profile picture", autofocus: true, autocomplete: "profile_picture" %>
+  </div>
 
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
-      </div>
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+  </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-      </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+  </div>
 
-      <div class="actions">
-        <%= f.submit "Sign up" %>
-      </div>
-      <% end %>
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+  <% end %>
 
     <%= render "users/shared/links" %>
 
- </div>
+  </div>
 </div>

@@ -11,7 +11,8 @@
                 <li class="nav-item mr-3">                     
                      <% if current_user.nil? %>
                        <button type="button" class="btn btn-warning">
-                       <%= link_to  "Crear cuenta", new_user_registration_path %> </button>
+                       <%= link_to  "Crear cuenta", new_user_registration_path %> 
+                       </button>
                     <%end%>
                 </li>
                 <li class="nav-item">
@@ -25,9 +26,7 @@
             <%= form_tag(root_path, method: 'get', class: 'd-flex nav-search-placeholder') do %>
                 <%= text_field_tag :q, nil, placeholder: 'Buscar tweets...', class:'mr-3 nav-search', id: 'search' %>
                 <%= submit_tag 'Buscar', class: 'submit-btn-search' %>
-            <% end %>
-         
+            <% end %>         
         </div>
     </div>
 </nav>
-

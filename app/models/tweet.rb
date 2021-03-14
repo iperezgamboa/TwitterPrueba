@@ -10,9 +10,10 @@ class Tweet < ApplicationRecord
    
   scope :tweets_for_me, ->(users_list) { where(
         user_id: users_list.map do |friend|
-            friend.id 
+            friend.friend_id 
         end
     ) } 
+
 
   scope :created_between, ->(start_date, end_date) {where(
       "(created_at) >= ? AND (created_at) <= ?", start_date, end_date

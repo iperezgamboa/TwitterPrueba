@@ -7,37 +7,35 @@ class TweetsController < ApplicationController
   #http_basic_authenticate_with name: "desafio", password: "12345", except: :index
   #before_action :authenticate_user!, except: [:index :create_api_tweet]
 
-
   # GET /tweets
   # GET /tweets.json
   def index
-    #@tweets = Tweet.order(params[:page]).order_by(:id)
-    @tweets = Tweet.order("created_at desc").page(params[:page])
-    #@tweeet = Tweet.new   
-    @tweet = Tweet.all   #new 23/03
-    #Book.order('published_at').page(3).per(10) 
-    @tweet = Tweet.new
+    
+    @tweet = Tweet.new   
+    
     if params[:q]
       @tweets = Tweet.where("content LIKE ?", "%#{params[:q]}%").order(created_at: :desc).page(params[:page])
       elsif current_user.nil?
         @tweets = Tweet.order(created_at: :desc).page(params[:page])
       else
-      @tweets = Tweet.tweets_for_me(current_user.friends).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.tweets_for_me(current_user.friends).or(Tweet.where("user_id = ?", current_user.id)).order(created_at: :desc).page(params[:page])
     end
   end  
 
+  #@tweets = Tweet.tweets_for_me(current_user.friends).or(Tweet.where("user_id = ?", current_user.id)).order(created_at: :desc).page(params[:page])
+
   def news
-    tweets = Tweet.last(50)
-    pretty_tweets = helpers.transform_to_hash(tweets)
-    render json: pretty_tweets
+      tweets = Tweet.last(50)
+      pretty_tweets = helpers.transform_to_hash(tweets)
+      render json: pretty_tweets
   end
 
   def date
-    date1 = params[:fecha1].to_date
-    date2 = params[:fecha2].to_date.end_of_day
-    date_tweets = Tweet.created_between(date1, date2)
-    pretty_tweets = helpers.transform_to_hash_with_date(date_tweets)
-    render json: pretty_tweets
+      date1 = params[:fecha1].to_date
+      date2 = params[:fecha2].to_date.end_of_day
+      date_tweets = Tweet.created_between(date1, date2)
+      pretty_tweets = helpers.transform_to_hash_with_date(date_tweets)
+      render json: pretty_tweets
   end 
 
 
@@ -65,35 +63,32 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Tweet was successfully created.' }
         format.json { render :show, status: :created, location: @tweet }
       else
-        format.html { render :new }
+        format.html { redirect_to root_path, notice: ' Remember to write something in your tweet' }
+        
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
   end
 
-def create_api_tweet
-  #@user = User.find_by(email: 'i.perezgamboa@twittertest')
-  @tweet = Tweet.new(
-    content: params[:content],
-    user_id: current_user.id
-  )
+    def create_api_tweet
+        @tweet = Tweet.new(
+        content: params[:content],
+        user_id: current_user.id
+    )
     
   respond_to do |format|
     if @tweet.save
-      format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
-      format.json { render json: @tweet, status: :created, location: @tweet }
+        format.html { redirect_to root_path, notice: 'El Tweet fue creado exitosamente.' }
+        format.json { render json: @tweet, status: :created, location: @tweet }
     else
-      format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
-      format.json { render json: @tweet.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, alert: 'El Tweet no pudo ser creado' }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
     end
   end
-end
-
-
-
+  end 
 
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json

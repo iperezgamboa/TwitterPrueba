@@ -14,17 +14,16 @@
     
     
     <% if current_user %>
-        <h4>You are logged in, now you can tweet. To search write q  in the search nav ;)</h4>  
+        <h4>You are logged in, now you can tweet.</h4>
+       <h4> To search a tweet and retweets that contains an specific content, write it down in the nav above and click in the "search botton". Example: write "dona" </h4>
+       
+       <%= render 'form', tweet: @tweet %>
+
+       <%= render 'tweets/table' %>          
+                                    
      
-         <button type="button" class="btn btn-warning ">
-         <%= link_to 'New Tweet', root_path %> </button>
-         <%= render 'form', tweet: @tweet %>
-         
-         <%= render 'tweets/table' %>
-
-    <% end %>
+    <% end %> 
               
-
     <br/>
     
     <%# if current_user.nil? %>
